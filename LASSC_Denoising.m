@@ -78,10 +78,11 @@ function  [X, W]   =   Low_rank_SSC( Y, c1, nsig, m )
 [U0,Sigma0,V0]    =   svd(full(Y),'econ');
 Sigma0            =   diag(Sigma0);
 
-% 1 time
+% 1 time original version
 % S                 =   max( Sigma0.^2/size(Y, 2) - nsig^2, 0 );
 % thr               =   c1*nsig^2./ ( sqrt(S) + eps );
 % S                 =   soft(Sigma0, thr);
+% r                 =   sum( S>0 );
 
 % 3 times like WNNM
 S                 =   max( Sigma0.^2/size(Y, 2) - nsig^2, 0 );
@@ -89,11 +90,11 @@ for i=1:3
 thr               =   c1*nsig^2./ ( sqrt(S) + eps );
 S                 =   soft(Sigma0, thr);
 end
-
-
-
-
 r                 =   sum( S>0 );
+
+% 1 time like WNNP
+% TempC  = c1 * NSig^2;
+% [S, r] = ClosedWNNM(Sigma0, TempC, eps);
 
 U                 =   U0(:,1:r);
 V                 =   V0(:,1:r);
