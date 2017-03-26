@@ -77,7 +77,7 @@ return;
 function  [X, W]   =   Low_rank_SSC( Y, c1, nsig, m )
 [U0,Sigma0,V0]    =   svd(full(Y),'econ');
 Sigma0            =   diag(Sigma0);
-
+ 
 % 1 time original version
 % S                 =   max( Sigma0.^2/size(Y, 2) - nsig^2, 0 );
 % thr               =   c1*nsig^2./ ( sqrt(S) + eps );
